@@ -1,0 +1,302 @@
+---
+import type { RepoCardData } from '@/lib/github';
+import StarIcon from '@/components/icons/Star.astro';
+import GithubIcon from '@/components/icons/Github.astro';
+import NpmIcon from '@/components/icons/Npm.astro';
+
+interface Props extends RepoCardData {
+    compact?: boolean;
+    class?: string;
+}
+
+const {
+  title,
+  description,
+  version,
+  stars,
+  lastUpdated,
+  githubUrl,
+  mainUrl,
+  npmUrl,
+  tags = [],
+  primaryLanguage,
+  license,
+  openIssues,
+  compact = false,
+  class: className = "",
+} = Astro.props;
+
+// Format date if provided
+const formattedDate = lastUpdated 
+  ? new Date(lastUpdated).toLocaleDateString("en-US", { 
+      year: "numeric", 
+      month: "short", 
+      day: "numeric" 
+    })
+  : null;
+
+const displayVersion = version ? version : null;
+const websiteUrl = mainUrl && mainUrl !== githubUrl && mainUrl !== npmUrl ? mainUrl : null;
+const primaryUrl = websiteUrl || githubUrl || null;
+const primaryUrlSafe = primaryUrl ? primaryUrl.replace(/'/g, "\\'") : null;
+const cardClick = primaryUrlSafe
+  ? `if (!event.target.closest('a,button')) window.open('${primaryUrlSafe}', '_blank', 'noopener,noreferrer');`
+  : undefined;
+const cardKeydown = primaryUrlSafe
+  ? `if ((event.key === 'Enter' || event.key === ' ') && !event.target.closest('a,button')) { event.preventDefault(); window.open('${primaryUrlSafe}', '_blank', 'noopener,noreferrer'); }`
+  : undefined;
+const primaryIsGithub = !websiteUrl && !!githubUrl;
+---
+
+<article 
+  class:list={[
+    "group relative bg-card border border-border",
+    "hover:border-primary/60",
+    "min-w-0 h-full",
+    primaryUrl ? "cursor-pointer" : "",
+    "repo-card",
+    compact ? "px-1.5 py-1 sm:px-2 sm:py-1.5" : "px-2 py-1.5 sm:px-3 sm:py-2",
+    className
+  ]}
+  role={primaryUrl ? "link" : undefined}
+  tabindex={primaryUrl ? "0" : undefined}
+  onclick={cardClick}
+  onkeydown={cardKeydown}
+  aria-label={primaryUrl ? `Open ${title}` : undefined}
+>
+  <!-- Left accent bar -->
+  <div 
+    class="absolute left-0 top-0 bottom-0 w-0.5 bg-border group-hover:bg-primary"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Reduced left padding from pl-2.5/pl-3 to pl-2 -->
+  <div class="pl-2 min-w-0 flex flex-col h-full">
+    <!-- Header row: title on left, stars + language + license on right -->
+    <div class:list={[
+      "flex items-center gap-2",
+      compact ? "mb-1" : "mb-1.5"
+    ]}>
+      <!-- Title moved to header row -->
+      <h3 
+        class:list={[
+          "font-medium text-foreground group-hover:text-primary truncate min-w-0 flex-1",
+          compact ? "text-xs sm:text-sm" : "text-sm sm:text-base"
+        ]}
+      >
+        {title}
+      </h3>
+
+      <!-- Right-aligned: stars + chips -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        {stars !== undefined && (
+          <span 
+            class:list={[
+              "inline-flex items-center gap-0.5 font-mono text-muted-foreground",
+              compact ? "text-[8px]" : "text-[9px] sm:text-[10px]"
+            ]}
+            aria-label={`${stars} stars`}
+          >
+          <StarIcon class="w-2.5 h-2.5 shrink-0" />
+            {stars.toLocaleString()}
+          </span>
+        )}
+
+        {primaryLanguage && (
+          <span 
+            class:list={[
+              "inline-flex items-center gap-1 font-mono text-muted-foreground bg-muted/50",
+              compact ? "text-[7px] px-1 py-px" : "text-[8px] sm:text-[9px] px-1 py-0.5"
+            ]}
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" aria-hidden="true"></span>
+            {primaryLanguage}
+          </span>
+        )}
+
+        {license && (
+          <span 
+            class:list={[
+              "font-mono text-muted-foreground bg-muted/50 hidden sm:inline",
+              compact ? "text-[7px] px-1 py-px" : "text-[8px] sm:text-[9px] px-1 py-0.5"
+            ]}
+          >
+            {license}
+          </span>
+        )}
+      </div>
+    </div>
+
+    <!-- Description -->
+    <p 
+      class:list={[
+        "text-muted-foreground leading-relaxed",
+        compact 
+          ? "text-[10px] sm:text-[11px] line-clamp-2 mb-1.5" 
+          : "text-[11px] sm:text-xs line-clamp-3 mb-2"
+      ]}
+    >
+      {description}
+    </p>
+
+    <!-- Tags -->
+    {tags.length > 0 && (
+      <div 
+        class:list={[
+          "flex flex-wrap gap-1",
+          compact ? "mb-1.5" : "mb-2"
+        ]}
+      >
+        {tags.slice(0, compact ? 3 : 5).map((tag) => (
+          <span 
+            class:list={[
+              "font-mono text-muted-foreground bg-muted",
+              compact ? "text-[7px] px-1 py-px" : "text-[8px] sm:text-[9px] px-1 py-0.5"
+            ]}
+          >
+            {tag}
+          </span>
+        ))}
+        {tags.length > (compact ? 3 : 5) && (
+          <span 
+            class:list={[
+              "font-mono text-muted-foreground/60",
+              compact ? "text-[7px]" : "text-[8px] sm:text-[9px]"
+            ]}
+          >
+            +{tags.length - (compact ? 3 : 5)}
+          </span>
+        )}
+      </div>
+    )}
+
+    <!-- Footer row: tighter vertical padding (pt-1.5 instead of pt-2) -->
+    <div 
+      class:list={[
+        "flex items-center justify-between gap-2",
+        compact ? "pt-1" : "pt-1.5",
+        "mt-auto"
+      ]}
+    >
+      <div class="flex items-center gap-2">
+        {formattedDate && (
+          <time 
+            datetime={lastUpdated}
+            class:list={[
+              "font-mono text-muted-foreground shrink-0",
+              compact ? "text-[7px] sm:text-[8px]" : "text-[8px] sm:text-[9px]"
+            ]}
+          >
+            {formattedDate}
+          </time>
+        )}
+
+        {openIssues !== undefined && openIssues > 0 && (
+          <span 
+            class:list={[
+              "inline-flex items-center gap-0.5 font-mono text-muted-foreground",
+              compact ? "text-[7px]" : "text-[8px] sm:text-[9px]"
+            ]}
+            aria-label={`${openIssues} open issues`}
+          >
+            <svg class="w-2 h-2 shrink-0" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/>
+            </svg>
+            {openIssues}
+          </span>
+        )}
+      </div>
+      
+      <div class="flex items-center gap-2 sm:gap-3 ml-auto">
+        {websiteUrl && (
+          <a 
+            href={websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              "inline-flex items-center gap-1 font-mono text-muted-foreground",
+              "hover:text-primary",
+              "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+              "min-h-[24px] min-w-[24px] justify-center sm:justify-start",
+              compact ? "text-[8px] sm:text-[9px]" : "text-[9px] sm:text-[10px]"
+            ]}
+            class="primary-link"
+            aria-label={`Visit ${title} website`}
+          >
+            <svg class="w-3 h-3 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+              <path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z" />
+            </svg>
+            <span class="hidden sm:inline">Website</span>
+          </a>
+        )}
+
+        <a 
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class:list={[
+            "inline-flex items-center gap-1 font-mono text-muted-foreground",
+            "hover:text-primary",
+            "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+            "min-h-[24px] min-w-[24px] justify-center sm:justify-start",
+            compact ? "text-[8px] sm:text-[9px]" : "text-[9px] sm:text-[10px]"
+          ]}
+          class={primaryIsGithub ? "primary-link" : undefined}
+          aria-label={`View ${title} on GitHub`}
+        >
+          <GithubIcon class="w-3 h-3 shrink-0" />
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+        
+        <!-- npm link now includes version badge when available -->
+        {npmUrl && (
+          <a 
+            href={npmUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              "inline-flex items-center gap-1 font-mono text-muted-foreground",
+              "hover:text-primary",
+              "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2",
+              "min-h-[24px] min-w-[24px] justify-center sm:justify-start",
+              compact ? "text-[8px] sm:text-[9px]" : "text-[9px] sm:text-[10px]"
+            ]}
+            aria-label={`View ${title} on npm${displayVersion ? ` (${displayVersion})` : ''}`}
+          >
+            <NpmIcon class="w-3 h-3 shrink-0" />
+            <span class="hidden sm:inline">npm</span>
+            {displayVersion && (
+              <span class="mt-0.5 ml-0.5 text-primary font-mono hidden sm:inline leading-none">
+                {displayVersion}
+              </span>
+            )}
+          </a>
+        )}
+
+        <!-- Show version with GitHub if no npm but version exists -->
+        {!npmUrl && displayVersion && (
+          <span 
+            class:list={[
+              "font-mono text-primary",
+              compact ? "text-[8px] sm:text-[9px]" : "text-[9px] sm:text-[10px]"
+            ]}
+          >
+            {displayVersion}
+          </span>
+        )}
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  :global(.repo-card:hover:not(:has(a:hover)) .primary-link) {
+    color: var(--color-primary);
+  }
+
+  :global(.repo-card:hover:not(:has(a:hover)) .primary-link svg) {
+    color: inherit;
+    fill: currentColor;
+  }
+</style>

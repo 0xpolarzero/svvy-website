@@ -1,0 +1,21 @@
+---
+import { PRODUCTS } from "@/lib/constants";
+import Section from "@/components/Section.astro";
+import RepoCard from "@/components/RepoCard.astro";
+import { fetchRepoCards } from "@/lib/github";
+
+const productData = await fetchRepoCards(PRODUCTS);
+---
+
+<Section
+  id="products"
+  label="Products"
+  title="Consumer apps"
+  description="What we're building or we shipped recently."
+>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+    {productData.map((product) => (
+      <RepoCard {...product} />
+    ))}
+  </div>
+</Section>

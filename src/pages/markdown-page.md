@@ -9,7 +9,7 @@ layout: ../layouts/main.astro
  </div>
  <a
   href="/"
-  class="p-4 underline hover:text-purple-500 transition-colors ease-in-out duration-200"
+  class="p-4 underline hover:text-purple-500"
  >
   Go home
  </a>

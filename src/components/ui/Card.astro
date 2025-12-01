@@ -1,0 +1,31 @@
+---
+import { cn } from "@/lib/utils";
+
+const { href, class: className = "" } = Astro.props;
+
+const Tag = href ? "a" : "div";
+const baseClasses = "group relative block bg-card border border-border overflow-hidden hover:border-muted-foreground/30";
+---
+
+<Tag href={href} class={cn(baseClasses, className)}>
+  <!-- Left accent bar -->
+  <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-border group-hover:bg-primary"></div>
+  
+  <!-- Reduced padding -->
+  <div class="p-2.5 sm:p-3 md:p-4 pl-3 sm:pl-4 md:pl-5">
+    <!-- Meta slot -->
+    <div class="mb-1">
+      <slot name="meta" />
+    </div>
+    
+    <!-- Title slot -->
+    <div class="mb-1">
+      <slot name="title" />
+    </div>
+    
+    <!-- Body content -->
+    <div class="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">
+      <slot />
+    </div>
+  </div>
+</Tag>

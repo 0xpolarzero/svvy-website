@@ -1,0 +1,21 @@
+---
+import { TOOLS } from "@/lib/constants";
+import Section from "@/components/Section.astro";
+import RepoCard from "@/components/RepoCard.astro";
+import { fetchRepoCards } from "@/lib/github";
+
+const toolData = await fetchRepoCards(TOOLS);
+---
+
+<Section
+  id="tools"
+  label="Tools"
+  title="Internal infrastructure"
+  description="We build and maintain internal tools that accelerate our research and product development."
+>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+    {toolData.map((tool) => (
+      <RepoCard {...tool} />
+    ))}
+  </div>
+</Section>

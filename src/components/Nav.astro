@@ -1,26 +1,24 @@
 ---
-import { SOCIAL, SITE_DOMAIN } from '@/lib/constants';
-import Button from '@/components/ui/Button.astro';
-import Separator from '@/components/ui/Separator.astro';
-import GithubIcon from '@/components/icons/Github.astro';
-import XIcon from '@/components/icons/X.astro';
-import SunIcon from '@/components/icons/Sun.astro';
-import MoonIcon from '@/components/icons/Moon.astro';
+import GithubIcon from '@/components/icons/Github.astro'
+import MoonIcon from '@/components/icons/Moon.astro'
+import SunIcon from '@/components/icons/Sun.astro'
+import XIcon from '@/components/icons/X.astro'
+import Button from '@/components/ui/Button.astro'
+import Separator from '@/components/ui/Separator.astro'
+import { SITE_DOMAIN, SOCIAL } from '@/lib/constants'
 
 const navLinks = [
   { href: '#product', label: 'products' },
   { href: '#tools', label: 'tools' },
   { href: '#contact', label: 'contact' },
-];
+]
 ---
 
 <nav
   class='sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md supports-backdrop-filter:bg-card/60'
 >
   <!-- System bar with navigation + controls -->
-  <div
-    class='flex items-center justify-between gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-muted/30'
-  >
+  <div class='flex items-center justify-between gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-muted/30'>
     <div class='flex flex-1 items-center gap-2 sm:gap-3 min-w-0'>
       <div class='mt-[3px] flex items-center gap-1 sm:gap-1.5 shrink-0'>
         <span class='w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-border'></span>
@@ -32,19 +30,19 @@ const navLinks = [
       >
         {SITE_DOMAIN}
       </span>
-      <div
-        class='hidden md:flex items-center gap-0.5 sm:gap-1'
-      >
-        {navLinks.map((link) => (
-          <Button
-            href={link.href}
-            variant='ghost'
-            size='xs'
-            class='font-normal text-[11px] sm:text-[12px]'
-          >
-            {link.label}
-          </Button>
-        ))}
+      <div class='hidden md:flex items-center gap-0.5 sm:gap-1'>
+        {
+          navLinks.map((link) => (
+            <Button
+              href={link.href}
+              variant='ghost'
+              size='xs'
+              class='font-normal text-[11px] sm:text-[12px]'
+            >
+              {link.label}
+            </Button>
+          ))
+        }
       </div>
     </div>
 
@@ -71,7 +69,7 @@ const navLinks = [
       </Button>
     </div>
 
-    <Separator orientation='vertical' class='h-2.5! mx-2 text-muted-foreground' />    
+    <Separator orientation='vertical' class='h-2.5! mx-2 text-muted-foreground' />
 
     <div class='flex items-center gap-2 sm:gap-3 shrink-0'>
       <Button
@@ -134,23 +132,23 @@ const navLinks = [
 
 <script is:inline>
   // Theme toggle
-  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggle = document.getElementById('theme-toggle')
   themeToggle?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
+    const isDark = document.documentElement.classList.toggle('dark')
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
+  })
 
   // Mobile menu toggle
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle')
+  const mobileMenu = document.getElementById('mobile-menu')
   mobileMenuToggle?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-  });
+    mobileMenu?.classList.toggle('hidden')
+  })
 
   // Close mobile menu on link click
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-    });
-  });
+      mobileMenu?.classList.add('hidden')
+    })
+  })
 </script>

@@ -1,23 +1,19 @@
 ---
-import { SOCIAL } from "@/lib/constants";
-import Section from "@/components/Section.astro";
-import Button from "@/components/ui/Button.astro";
-import MailIcon from "@/components/icons/Mail.astro";
-import XIcon from "@/components/icons/X.astro";
+import MailIcon from '@/components/icons/Mail.astro'
+import XIcon from '@/components/icons/X.astro'
+import Section from '@/components/Section.astro'
+import Button from '@/components/ui/Button.astro'
+import { SOCIAL } from '@/lib/constants'
 ---
 
-<Section
-  id="contact"
-  label="Contact"
-  title="Get in touch"
->
-  <div class="max-w-xl space-y-2 sm:space-y-3">
-    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-      <Button href={`mailto:${SOCIAL.email}`} variant="outline">
+<Section id='contact' label='Contact' title='Get in touch'>
+  <div class='max-w-xl space-y-2 sm:space-y-3'>
+    <div class='flex flex-wrap items-center gap-1.5 sm:gap-2'>
+      <Button href={`mailto:${SOCIAL.email}`} variant='outline'>
         <MailIcon />
         {SOCIAL.email}
       </Button>
-      <Button href={SOCIAL.twitter} variant="outline" target="_blank" rel="noopener noreferrer">
+      <Button href={SOCIAL.twitter} variant='outline' target='_blank' rel='noopener noreferrer'>
         <XIcon />
         {SOCIAL.twitterHandle}
       </Button>

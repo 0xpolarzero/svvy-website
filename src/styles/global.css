@@ -4,199 +4,199 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-
-/* ============================================
+  /* ============================================
    Theme Variables - shadcn/ui style
    Light/dark mode using CSS custom properties
    ============================================ */
 
-/* Restructured to use CSS custom properties that work with .dark class toggle */
-:root {
-  /* Light mode colors */
-  --background: 60 10% 98%;
-  --foreground: 240 10% 10%;
-  /* Darker orange for better contrast in light mode */
-  --primary: 28 95% 46%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 60 5% 94%;
-  --secondary-foreground: 240 10% 20%;
-  --muted: 60 5% 92%;
-  --muted-foreground: 240 5% 40%;
-  --accent: 28 95% 46%;
-  --accent-foreground: 240 10% 10%;
-  --border: 60 5% 88%;
-  --input: 60 5% 88%;
-  --ring: 28 95% 46%;
-  --card: 60 5% 99%;
-  --card-foreground: 240 10% 10%;
+  /* Restructured to use CSS custom properties that work with .dark class toggle */
+  :root {
+    /* Light mode colors */
+    --background: 60 10% 98%;
+    --foreground: 240 10% 10%;
+    /* Darker orange for better contrast in light mode */
+    --primary: 28 95% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 60 5% 94%;
+    --secondary-foreground: 240 10% 20%;
+    --muted: 60 5% 92%;
+    --muted-foreground: 240 5% 40%;
+    --accent: 28 95% 46%;
+    --accent-foreground: 240 10% 10%;
+    --border: 60 5% 88%;
+    --input: 60 5% 88%;
+    --ring: 28 95% 46%;
+    --card: 60 5% 99%;
+    --card-foreground: 240 10% 10%;
 
-  --radius: 2px;
-}
+    --radius: 2px;
+  }
 
-.dark {
-  /* Dark mode colors */
-  --background: 240 20% 5%;
-  --foreground: 60 5% 95%;
-  --primary: 40 100% 60%;
-  --primary-foreground: 240 20% 8%;
-  --secondary: 240 15% 12%;
-  --secondary-foreground: 60 5% 90%;
-  --muted: 240 12% 15%;
-  --muted-foreground: 240 5% 55%;
-  --accent: 40 100% 60%;
-  --accent-foreground: 240 20% 8%;
-  --border: 240 12% 18%;
-  --input: 240 12% 18%;
-  --ring: 40 100% 60%;
-  --card: 240 18% 8%;
-  --card-foreground: 60 5% 95%;
-}
+  .dark {
+    /* Dark mode colors */
+    --background: 240 20% 5%;
+    --foreground: 60 5% 95%;
+    --primary: 40 100% 60%;
+    --primary-foreground: 240 20% 8%;
+    --secondary: 240 15% 12%;
+    --secondary-foreground: 60 5% 90%;
+    --muted: 240 12% 15%;
+    --muted-foreground: 240 5% 55%;
+    --accent: 40 100% 60%;
+    --accent-foreground: 240 20% 8%;
+    --border: 240 12% 18%;
+    --input: 240 12% 18%;
+    --ring: 40 100% 60%;
+    --card: 240 18% 8%;
+    --card-foreground: 60 5% 95%;
+  }
 
-@theme inline {
-  --font-sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "Geist Mono", "JetBrains Mono", "Fira Code", monospace;
+  @theme inline {
+    --font-sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+    --font-mono: "Geist Mono", "JetBrains Mono", "Fira Code", monospace;
 
-  /* Custom breakpoint */
-  --breakpoint-xs: 420px;
+    /* Custom breakpoint */
+    --breakpoint-xs: 420px;
 
-  /* Map CSS variables to Tailwind color tokens */
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
+    /* Map CSS variables to Tailwind color tokens */
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
 
-  /* Very sharp radii */
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 3px;
-  --radius-xl: 4px;
-}
+    /* Very sharp radii */
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 3px;
+    --radius-xl: 4px;
+  }
 
-/* Utilities */
-.line-clamp-2 {
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.line-clamp-3 {
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+  /* Utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
-/* ============================================
+  /* ============================================
    Base Styles
    ============================================ */
 
-* {
-  border-color: hsl(var(--border));
-}
+  * {
+    border-color: hsl(var(--border));
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-sans);
-  font-feature-settings: "rlig" 1, "calt" 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h5 {
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
+  /* Typography */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h5 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
 
-h1 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.1;
-}
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.1;
+  }
 
-h2 {
-  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-  line-height: 1.2;
-}
+  h2 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    line-height: 1.2;
+  }
 
-h3 {
-  font-size: 1.125rem;
-  line-height: 1.3;
-}
+  h3 {
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
 
-p {
-  line-height: 1.6;
-}
+  p {
+    line-height: 1.6;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-a:hover {
-  color: var(--color-primary);
-}
+  a:hover {
+    color: var(--color-primary);
+  }
 
-/* Focus states */
-:focus-visible {
-  outline: 2px solid var(--color-ring);
-  outline-offset: 2px;
-}
+  /* Focus states */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
 
-/* Selection */
-::selection {
-  background-color: var(--color-primary);
-  color: var(--color-primary-foreground);
-}
+  /* Selection */
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
 
-/* Mono text utility */
-.font-mono {
-  font-family: var(--font-mono);
-  font-size: 0.8125em;
-  letter-spacing: 0.02em;
-}
+  /* Mono text utility */
+  .font-mono {
+    font-family: var(--font-mono);
+    font-size: 0.8125em;
+    letter-spacing: 0.02em;
+  }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted-foreground);
-}
-
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted-foreground);
+  }
 } /* end @layer base */

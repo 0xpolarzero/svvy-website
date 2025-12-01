@@ -5,16 +5,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "apps/**",
-      "extensions/**",
-      "libs/**",
-      "test/**",
-      "docs/**",
-      ".vscode/**",
-      "scripts/**",
-      "./*.json"
-    ]
+    "includes": ["src/**", ".vscode/**", "./*.json"],
+    "ignoreUnknown": true
   },
   "formatter": {
     "enabled": true,
@@ -48,6 +40,11 @@
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
       "bracketSpacing": true
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   },
   "overrides": [

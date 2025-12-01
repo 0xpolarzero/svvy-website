@@ -1,22 +1,19 @@
 ---
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 
 interface Props {
-  orientation?: "horizontal" | "vertical";
-  class?: string;
+  orientation?: 'horizontal' | 'vertical'
+  class?: string
 }
 
-const { orientation = "horizontal", class: className = "" } = Astro.props;
+const { orientation = 'horizontal', class: className = '' } = Astro.props
 
-const isVertical = orientation === "vertical";
-const base =
-  "shrink-0 bg-border";
+const isVertical = orientation === 'vertical'
+const base = 'shrink-0 bg-border'
 
-const size = isVertical
-  ? "w-px h-full"
-  : "h-px w-full";
+const size = isVertical ? 'w-px h-full' : 'h-px w-full'
 
-const classes = cn(base, size, className);
+const classes = cn(base, size, className)
 ---
 
-<div role="separator" aria-orientation={orientation} class={classes} />
+<div role='separator' aria-orientation={orientation} class={classes}></div>
